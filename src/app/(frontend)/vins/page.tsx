@@ -16,7 +16,6 @@ export default function VinsPage() {
     <WineCatalog
       heading={{
         kicker: 'Collection',
-        lede: 'Chaque fiche reprend les textes et ton de la boutique officielle.',
         title: 'Nos cuvées',
       }}
       initialFilter="wine"
