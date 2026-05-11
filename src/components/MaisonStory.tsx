@@ -9,11 +9,11 @@ export function MaisonStory() {
         <figure className="domaine__figure">
           <div className="domaine__figure-frame">
             <Image
-              alt="Vignoble et terroir"
+              alt="Portrait des vignerons en cave, fûts de chêne en arrière-plan"
               className="domaine__figure-img"
               fill
               sizes="(max-width: 900px) 100vw, 42vw"
-              src="/images/domaine.jpg"
+              src="/images/maison-signature-vivante.png"
             />
           </div>
           <figcaption className="domaine__figure-cap">Loire · tuffeau · vignes nobles</figcaption>

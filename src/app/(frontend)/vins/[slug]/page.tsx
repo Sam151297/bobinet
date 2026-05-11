@@ -4,7 +4,12 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-import { WINES, productImageIsRemoveBgCutout, productImageUrl } from '@/data/wines'
+import {
+  WINES,
+  productImageIsPublicBundled,
+  productImageIsRemoveBgCutout,
+  productImageUrl,
+} from '@/data/wines'
 import { paragraphsFromDescription } from '@/lib/format-description'
 import { getFrenchDescription } from '@/lib/get-description-fr'
 
@@ -35,10 +40,12 @@ export default async function WinePage(props: Props) {
   if (!wine) notFound()
 
   const body = getFrenchDescription(wine.slug)
-  const productSrc = productImageUrl(wine)
+  const productSrc =
+    wine.kind === 'wine' ? `/images/products/${wine.slug}-removebg-preview.png` : productImageUrl(wine)
   const detailPhotoClass = productImageIsRemoveBgCutout(productSrc)
     ? 'detail-pedestal__img bottle-matte__photo bottle-matte__photo--cutout'
     : 'detail-pedestal__img bottle-matte__photo'
+  const publicBundled = productImageIsPublicBundled(productSrc)
 
   return (
     <article className="detail">
@@ -58,6 +65,7 @@ export default async function WinePage(props: Props) {
                 priority
                 sizes="(max-width: 979px) 100vw, 50vw"
                 src={productSrc}
+                unoptimized={publicBundled}
               />
               <div className="detail-exp-hero__veil" aria-hidden />
             </div>
@@ -71,9 +79,10 @@ export default async function WinePage(props: Props) {
                   alt=""
                   className={detailPhotoClass}
                   fill
+                  priority
                   sizes="(max-width: 900px) 100vw, 50vw"
                   src={productSrc}
-                  priority
+                  unoptimized={publicBundled}
                 />
               </div>
             </div>

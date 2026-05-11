@@ -900,6 +900,13 @@ img {
   z-index: 2;
 }
 
+/* next/image fill : parent direct en position relative (cf. doc Next — Image). */
+.wine-card__img-fit {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .detail-pedestal__shell.bottle-matte__shell {
   position: relative;
   z-index: 2;

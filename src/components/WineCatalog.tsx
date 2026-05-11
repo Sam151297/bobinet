@@ -23,12 +23,14 @@ export function WineCatalog({
   showFilterTabs = true,
   heading = {},
   sectionId = 'vins',
+  forceWineProductImages = false,
 }: {
   wines?: Wine[]
   initialFilter?: Filter
   showFilterTabs?: boolean
   heading?: Partial<{ kicker: string; title: string; lede: string }>
   sectionId?: string
+  forceWineProductImages?: boolean
 }) {
   const [filter, setFilter] = useState<Filter>(initialFilter)
 
@@ -72,8 +74,13 @@ export function WineCatalog({
         </div>
       </div>
       <div className="wine-mosaic">
-        {orderedList.map((w) => (
-          <WineCard key={w.slug} wine={w} />
+        {orderedList.map((w, index) => (
+          <WineCard
+            key={w.slug}
+            forceWineProductImages={forceWineProductImages}
+            imagePriority={index < 6}
+            wine={w}
+          />
         ))}
       </div>
     </section>

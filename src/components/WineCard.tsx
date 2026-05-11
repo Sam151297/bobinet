@@ -2,21 +2,39 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import { productImageIsRemoveBgCutout, productImageUrl, type Wine } from '@/data/wines'
+import {
+  productImageIsPublicBundled,
+  productImageIsRemoveBgCutout,
+  productImageUrl,
+  type Wine,
+} from '@/data/wines'
 import { excerptForCatalog } from '@/lib/wine-catalog-excerpt'
 
 function formatEUR(n: number) {
   return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(n)
 }
 
-export function WineCard({ wine }: { wine: Wine }) {
+export function WineCard({
+  wine,
+  forceWineProductImages = false,
+  imagePriority = false,
+}: {
+  wine: Wine
+  forceWineProductImages?: boolean
+  /** Premières cartes du catalogue : LCP / above-the-fold — eager + priority Next/Image. */
+  imagePriority?: boolean
+}) {
   const href = `/vins/${wine.slug}`
-  const productSrc = productImageUrl(wine)
+  const productSrc =
+    forceWineProductImages && wine.kind === 'wine'
+      ? `/images/products/${wine.slug}-removebg-preview.png`
+      : productImageUrl(wine)
   const teaser = excerptForCatalog(wine.slug, wine.kind === 'wine' ? 188 : 210)
   const photoClass =
     wine.kind === 'wine' && productImageIsRemoveBgCutout(productSrc)
       ? 'wine-card__img bottle-matte__photo bottle-matte__photo--cutout'
       : 'wine-card__img bottle-matte__photo'
+  const publicBundled = productImageIsPublicBundled(productSrc)
 
   if (wine.kind === 'experience') {
     return (
@@ -29,6 +47,7 @@ export function WineCard({ wine }: { wine: Wine }) {
             priority={false}
             sizes="100vw"
             src={productSrc}
+            unoptimized={publicBundled}
           />
           <div className="wine-card__exp-veil" aria-hidden />
         </div>
@@ -52,13 +71,18 @@ export function WineCard({ wine }: { wine: Wine }) {
         <div className="bottle-matte__floor" aria-hidden />
         <div className="bottle-matte__shine" aria-hidden />
         <div className="wine-card__img-shell bottle-matte__shell">
-          <Image
-            alt=""
-            className={photoClass}
-            fill
-            sizes="(max-width: 639px) 100vw, (max-width: 959px) 50vw, (max-width: 1279px) 34vw, 26vw"
-            src={productSrc}
-          />
+          <div className="wine-card__img-fit">
+            <Image
+              alt=""
+              className={photoClass}
+              fill
+              loading={imagePriority ? 'eager' : 'lazy'}
+              priority={imagePriority}
+              sizes="(max-width: 639px) 100vw, (max-width: 959px) 50vw, (max-width: 1279px) 34vw, 26vw"
+              src={productSrc}
+              unoptimized={publicBundled}
+            />
+          </div>
         </div>
       </div>
       <div className="wine-card__meta">

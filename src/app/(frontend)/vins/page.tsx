@@ -22,6 +22,7 @@ export default function VinsPage() {
       initialFilter="wine"
       sectionId="catalogue-vins"
       showFilterTabs={false}
+      forceWineProductImages
       wines={wines}
     />
   )

@@ -1,7 +1,4 @@
-/**
- * Catalogue : packshots PNG — vins `{slug}-removebg-preview.png`, expériences `{slug}.png`; surcharge possible via `productImage`.
- * Voir `tests/int/product-images.int.spec.ts` pour vérifier que chaque entrée pointe bien vers un fichier existant sous `public/`.
- */
+/** Catalogue : packshots PNG — vins `{slug}-removebg-preview.png`, expériences `{slug}.png`; surcharge possible via `productImage`. */
 
 export type WineKind = 'wine' | 'experience'
 
@@ -38,7 +35,12 @@ export function productImageIsRemoveBgCutout(path: string): boolean {
   return path.toLowerCase().includes('removebg-preview')
 }
 
-export const HERO_IMAGE_PATH = '/images/products/amateus-bobi-2020-removebg-preview.png'
+/** Packshots sous `public/images/products/` : `next/image` avec `unoptimized` pour servir l’URL telle quelle (pas `/_next/image`). */
+export function productImageIsPublicBundled(src: string): boolean {
+  return src.startsWith('/images/products/')
+}
+
+export const HERO_IMAGE_PATH = '/images/shop/hero-saumur-chateau.png'
 
 export const WINES: Wine[] = [
   {

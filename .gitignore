@@ -19,9 +19,6 @@
 # production
 /build
 
-# pnpm store (never commit)
-.pnpm-store/
-
 # misc
 .DS_Store
 *.pem
