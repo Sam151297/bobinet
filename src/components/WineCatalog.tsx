@@ -13,8 +13,6 @@ type Filter = 'all' | WineKind
 const HEADING_DEFAULT = {
   kicker: 'La collection',
   title: 'Vins & expériences',
-  lede:
-    'Sélection alignée avec la boutique en ligne — chaque fiche reprend les résumés officiels du domaine.',
 } as const
 
 export function WineCatalog({
@@ -35,8 +33,7 @@ export function WineCatalog({
   const [filter, setFilter] = useState<Filter>(initialFilter)
 
   const orderedList = useMemo(() => {
-    const base =
-      filter === 'all' ? wines : wines.filter((w) => w.kind === (filter as WineKind))
+    const base = filter === 'all' ? wines : wines.filter((w) => w.kind === (filter as WineKind))
     return orderCatalogForDisplay(base, filter)
   }, [filter, wines])
 
