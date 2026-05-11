@@ -38,7 +38,7 @@ export function productImageIsRemoveBgCutout(path: string): boolean {
   return path.toLowerCase().includes('removebg-preview')
 }
 
-export const HERO_IMAGE_PATH = '/images/shop/wine-rack.jpg'
+export const HERO_IMAGE_PATH = '/images/products/amateus-bobi-2020-removebg-preview.png'
 
 export const WINES: Wine[] = [
   {
