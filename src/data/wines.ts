@@ -1,4 +1,7 @@
-/** Catalogue : packshots PNG — vins `{slug}-removebg-preview.png`, expériences `{slug}.png`; surcharge possible via `productImage`. */
+/**
+ * Catalogue : packshots PNG — vins `{slug}-removebg-preview.png`, expériences `{slug}.png`; surcharge possible via `productImage`.
+ * Voir `tests/int/product-images.int.spec.ts` pour vérifier que chaque entrée pointe bien vers un fichier existant sous `public/`.
+ */
 
 export type WineKind = 'wine' | 'experience'
 

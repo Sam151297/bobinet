@@ -1,3 +1,8 @@
+/**
+ * Ancien prototype statique (non utilisé par Next.js). Les `photo` sont une rotation
+ * de JPG `/images/shop/*` — aucun lien 1:1 avec les cuvées (effet « images au hasard »).
+ * Boutique actuelle : routes `/vins` et `pnpm dev`, images via `productImageUrl()` dans `./data/wines`.
+ */
 import './style.css'
 
 type Lang = 'fr' | 'en'
@@ -7,7 +12,7 @@ type Kind = 'wine' | 'experience'
 type Item = {
   id: string
   kind: Kind
-  /** Visuel carte boutique — à remplacer par les photos officielles des cuvées. */
+  /** @deprecated Prototype : stock photos; le site Next utilise les packshots sous /images/products/. */
   photo: string
   nameFr: string
   nameEn: string
